@@ -23,7 +23,10 @@ const UserSignUp = () => {
         console.log({ name, email, password });
 
         createWithEmailPass(email, password)
-            .then(result => { console.log(result.user) })
+            .then(result => {
+                console.log(result.user);
+                
+            })
             .catch(error => { console.error(error) });
     }
 
