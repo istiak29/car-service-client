@@ -1,4 +1,4 @@
-import { useLoaderData } from "react-router-dom";
+import { Link, useLoaderData } from "react-router-dom";
 import Facility from "../Shared/Facility";
 import { GoArrowRight } from "react-icons/go";
 import { HiDocumentChartBar } from "react-icons/hi2";
@@ -10,7 +10,7 @@ const ServiceDetail = () => {
 
     const serviceDetail = useLoaderData()
 
-    const { title, img, price, description, facility } = serviceDetail;
+    const { _id, title, img, price, description, facility } = serviceDetail;
 
     return (
         <div>
@@ -35,7 +35,7 @@ const ServiceDetail = () => {
                     {/* --------------- */}
                     <div className="space-y-7">
                         <h2 className="font-bold text-2xl">3 Simple Steps to Process</h2>
-                        <p className="text-zinc-400">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text</p>
+                        <p className="text-zinc-400">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which do not look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there is not anything embarrassing hidden in the middle of text</p>
                         <div className=" flex gap-5 ">
                             <div className=" border rounded-xl text-center p-5 space-y-4">
                                 <span className="  p-3 rounded-full text-white bg-orange-600  text-center">01</span>
@@ -98,7 +98,7 @@ const ServiceDetail = () => {
 
                     </div>
                     <h2 className="font-bold text-4xl">Price: ${price}</h2>
-                    <div className="font-bold text-lg px-7 p-4 text-center  rounded-lg bg-orange-600 text-white">Proceed Checkout</div>
+                    <div className="font-bold text-lg px-7 p-4 text-center  rounded-lg bg-orange-600 text-white"> <Link to={`/chcekout/${_id}`}>Proceed Checkout</Link></div>
                 </div>
                 
             </div>
