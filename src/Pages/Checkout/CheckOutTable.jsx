@@ -2,9 +2,9 @@ import PropTypes from 'prop-types'
 import { ImCross } from "react-icons/im";
 
 
-const CheckOutTable = ({ checkOut, handleDelete }) => {
+const CheckOutTable = ({ checkOut, handleDelete, handleConfirm }) => {
 
-    const { _id, img, serviceTitle, price, orderDate } = checkOut;
+    const { _id, img, serviceTitle, price, orderDate, status } = checkOut;
 
     return (
         <tbody >
@@ -41,7 +41,12 @@ const CheckOutTable = ({ checkOut, handleDelete }) => {
                 </td>
 
                 <th>
-                    <button className="btn bg-orange-500 hover:bg-orange-600 text-white">Pending</button>
+                    {status === 'Approved' ? (
+                        <button className="btn  btn-success text-white font-bold ">Approved</button>
+                    ) :
+                        (<button onClick={() => handleConfirm(_id)} className="btn bg-orange-500 hover:bg-orange-600 text-white">Pending</button>)
+                        
+                    }
                 </th>
             </tr>
 
@@ -54,4 +59,5 @@ export default CheckOutTable;
 CheckOutTable.propTypes = {
     checkOut: PropTypes.object,
     handleDelete: PropTypes.func,
+    handleConfirm: PropTypes.func,
 }

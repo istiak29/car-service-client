@@ -19,7 +19,7 @@ const UserCheckOut = () => {
                 setCheckOuts(result.data);
             })
             .catch(error => console.error(error))
-    }, []);
+    }, [url]);
 
 
     const handleDelete = id => {
@@ -57,6 +57,52 @@ const UserCheckOut = () => {
         });
     }
 
+
+    const handleConfirm = id => {
+
+        Swal.fire({
+            title: "Do you want to save the changes?",
+            showDenyButton: true,
+            showCancelButton: true,
+            confirmButtonText: "Save",
+            denyButtonText: `Don't save`
+        }).then((result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+
+                axios.patch(`http://localhost:5000/checkouts/${id}`, { status: "Approved"})
+                    .then(result => {
+                        console.log(result.data)
+
+                        if (result.data.modifiedCount > 0) { 
+                            Swal.fire("Saved!", "", "success");
+
+                            const remaining = checkOuts.filter(checkOut => checkOut._id !== id);
+
+                            const updated = checkOuts.find(checkOut => checkOut._id === id);
+
+                            updated.status = 'Approved';
+
+                            const updatedCheckOuts = [updated, ...remaining];
+
+                            setCheckOuts(updatedCheckOuts);
+
+
+                        }
+                    })
+                    .catch(error => console.error(error));
+
+                
+            } else if (result.isDenied) {
+                Swal.fire("Changes are not saved", "", "info");
+            }
+        });
+
+
+        
+    }
+    
+
     return (
         <div>
             <h2 className="font-bold text-3xl">You have: {checkOuts.length} services.</h2>
@@ -83,6 +129,7 @@ const UserCheckOut = () => {
                                 key={checkOut._id}
                                 checkOut={checkOut}
                                 handleDelete={handleDelete}
+                                handleConfirm={handleConfirm}
                             ></CheckOutTable>
                         )
                     }
