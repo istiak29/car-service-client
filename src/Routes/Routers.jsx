@@ -7,6 +7,8 @@ import UserMainLayout from "../Pages/User/UserMainLayout";
 import ErrorPage from "./ErrorPage";
 import ServiceDetail from "../Pages/Details/ServiceDetail";
 import CheckOut from "../Pages/CheckOut/CheckOut";
+import ManageCheckOut from "../Pages/Checkout/ManageCheckOut";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -33,6 +35,13 @@ const router = createBrowserRouter([
                 path: '/chcekout/:id',
                 element: <CheckOut></CheckOut>,
                 loader: ({ params }) => fetch(`http://localhost:5000/services/${params.id}`)
+            },
+
+            {
+                path: '/managecheckout',
+                element: <PrivateRoute>
+                    <ManageCheckOut></ManageCheckOut>
+                </PrivateRoute>
             }
         ],
     },
