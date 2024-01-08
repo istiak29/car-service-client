@@ -17,7 +17,7 @@ const Navbar = () => {
         <li>
             {
                 user?.email ? (
-                    <NavLink to={'/managecheckout'}>Manage Checkouts</NavLink> ) :
+                    <NavLink to={'/usercheckout'}>Manage Checkouts</NavLink> ) :
                     <NavLink>Profile</NavLink>
                 
             }
