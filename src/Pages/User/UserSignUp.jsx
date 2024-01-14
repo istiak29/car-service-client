@@ -2,7 +2,7 @@ import login from '../../assets/images/login/login.svg'
 import { FcGoogle } from "react-icons/fc";
 import { FaFacebook } from "react-icons/fa";
 import { FaGithub } from "react-icons/fa";
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../Providers/AuthProvider';
 import Swal from 'sweetalert2';
@@ -10,7 +10,12 @@ import Swal from 'sweetalert2';
 
 const UserSignUp = () => {
 
+
     const navigate = useNavigate();
+
+    const location = useLocation()
+    console.log(location)
+
 
     const { createWithEmailPass } = useContext(AuthContext);
 
@@ -36,7 +41,7 @@ const UserSignUp = () => {
                     timer: 1500
                 });
                 
-                navigate('/')
+                navigate(location?.state?.path === '/login' ? '/': location.state.path)
                 
             })
             .catch(error => { console.error(error) });

@@ -38,7 +38,7 @@ const CheckOut = () => {
 
         console.log(order)
 
-        axios.post('http://localhost:5000/checkouts', order)
+        axios.post('http://localhost:5000/checkouts', order, { withCredentials: true })
             .then(result => {
                 console.log(result.data)
                 Swal.fire({

@@ -13,9 +13,9 @@ const UserCheckOut = () => {
     const url = `http://localhost:5000/checkouts?email=${user?.email}`
 
     useEffect(() => {
-        axios.get(url)
+        axios.get(url, { withCredentials: true })
             .then(result => {
-                console.log(result.data);
+                console.log('user checkouts: ',result.data);
                 setCheckOuts(result.data);
             })
             .catch(error => console.error(error))
@@ -34,7 +34,7 @@ const UserCheckOut = () => {
         }).then((result) => {
             if (result.isConfirmed) {
 
-                axios.delete(`http://localhost:5000/checkouts/${id}`)
+                axios.delete(`http://localhost:5000/checkouts/${id}`, )
                     .then(result => {
                         console.log(result.data)
                         
